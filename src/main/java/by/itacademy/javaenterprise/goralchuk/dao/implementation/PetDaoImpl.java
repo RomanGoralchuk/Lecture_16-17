@@ -1,10 +1,8 @@
 package by.itacademy.javaenterprise.goralchuk.dao.implementation;
 
-import by.itacademy.javaenterprise.goralchuk.MainTest;
 import by.itacademy.javaenterprise.goralchuk.dao.PetDao;
 import by.itacademy.javaenterprise.goralchuk.entity.Pet;
 import by.itacademy.javaenterprise.goralchuk.entity.PetType;
-import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
