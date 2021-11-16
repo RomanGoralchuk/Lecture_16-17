@@ -5,7 +5,10 @@ CREATE TABLE `people` (
 	`pet_id` INT(11) NOT NULL,
 	PRIMARY KEY (`people_id`) USING BTREE,
 	INDEX `FK_people_pet` (`pet_id`) USING BTREE,
-	CONSTRAINT `FK_people_pet` FOREIGN KEY (`pet_id`) REFERENCES `hibernateTest`.`pet` (`pet_id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+	CONSTRAINT `FK_people_pet`
+	FOREIGN KEY (`pet_id`)
+	REFERENCES `hibernateTest`.`pet` (`pet_id`)
+	ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB
