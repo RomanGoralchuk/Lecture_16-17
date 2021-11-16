@@ -4,7 +4,6 @@ services:
   db:
     image: mariadb:10.5
     hostname: mariadb
-    container_name: hibernate_test_container
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: root

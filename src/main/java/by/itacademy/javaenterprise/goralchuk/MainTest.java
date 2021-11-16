@@ -1,10 +1,4 @@
 package by.itacademy.javaenterprise.goralchuk;
-
-import by.itacademy.javaenterprise.goralchuk.dao.PatientDAO;
-import by.itacademy.javaenterprise.goralchuk.dao.PatientDAOImpl;
-import by.itacademy.javaenterprise.goralchuk.entity.Patient;
-import by.itacademy.javaenterprise.goralchuk.entity.PatientSex;
-import by.itacademy.javaenterprise.goralchuk.spring.SpringConfig;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,18 +14,5 @@ public class MainTest {
                 .loadDefaultConfigurationFiles()
                 .load();
         flyway.migrate();
-
-        AnnotationConfigApplicationContext context = new
-                AnnotationConfigApplicationContext(SpringConfig.class);
-
-        PatientDAO patientsDAO = context.getBean("patientBean", PatientDAOImpl.class);
-
-        logger.info("Test response to the request: " + patientsDAO.get(2));
-        logger.info("Test response to the request: " + patientsDAO.findAllPersons());
-        logger.info("add Patient " + patientsDAO.save(
-                new Patient("Santa", "Claus", PatientSex.M, java.sql.Date.valueOf("1920-12-24"))));
-        logger.info("Test response to the request: " + patientsDAO.findBySexPatients(PatientSex.M));
-
-        context.close();
     }
 }
