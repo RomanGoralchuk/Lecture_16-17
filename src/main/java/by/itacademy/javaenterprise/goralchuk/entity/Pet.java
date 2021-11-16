@@ -26,4 +26,15 @@ public class Pet {
     @OneToOne(mappedBy = "pet", fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     private People master;
+
+    @Override
+    public String toString() {
+        return "\n Pet{" +
+                "id=" + id +
+                ", animalName='" + animalName + "'" +
+                ", petType=" + petType +
+                ", birthday=" + birthday +
+                ", master='" + master.getName() + "'" +
+                '}';
+    }
 }

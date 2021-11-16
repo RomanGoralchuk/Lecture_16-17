@@ -1,14 +1,22 @@
 package by.itacademy.javaenterprise.goralchuk.dao.implementation;
 
+import by.itacademy.javaenterprise.goralchuk.MainTest;
 import by.itacademy.javaenterprise.goralchuk.dao.PetDao;
 import by.itacademy.javaenterprise.goralchuk.entity.Pet;
 import by.itacademy.javaenterprise.goralchuk.entity.PetType;
+import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
 public class PetDaoImpl implements PetDao {
+    private EntityManager entityManager;
+    private static final Logger logger = LoggerFactory.getLogger(PetDaoImpl.class);
+
     @Override
     public Pet get(Serializable id) throws SQLException {
         return null;

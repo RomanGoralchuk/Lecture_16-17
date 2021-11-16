@@ -23,4 +23,14 @@ public class People {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "pet_id")
     private Pet pet;
+
+    @Override
+    public String toString() {
+        return "\n People{" +
+                "id=" + id +
+                ", name='" + name + "'" +
+                ", surname='" + surname + "'" +
+                ", pet=" + pet.getAnimalName() + "/" + pet.getId() +
+                '}';
+    }
 }
