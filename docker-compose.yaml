@@ -11,4 +11,4 @@ services:
       MARIADB_USER: user
       MARIADB_PASSWORD: userpass
     ports:
-      - "3307:3306"
+      - "3306:3306"

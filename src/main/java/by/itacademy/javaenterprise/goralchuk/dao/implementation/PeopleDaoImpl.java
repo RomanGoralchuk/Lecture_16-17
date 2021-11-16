@@ -3,12 +3,14 @@ package by.itacademy.javaenterprise.goralchuk.dao.implementation;
 import by.itacademy.javaenterprise.goralchuk.dao.PeopleDao;
 import by.itacademy.javaenterprise.goralchuk.entity.People;
 import by.itacademy.javaenterprise.goralchuk.entity.Pet;
+import by.itacademy.javaenterprise.goralchuk.entity.PetType;
 
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
 public class PeopleDaoImpl implements PeopleDao {
+
     @Override
     public People get(Serializable id) throws SQLException {
         return null;
@@ -35,7 +37,7 @@ public class PeopleDaoImpl implements PeopleDao {
     }
 
     @Override
-    public List<Pet> getAllPeopleByPet(Pet pet) throws SQLException {
+    public List<People> getAllPeopleByPetType(PetType petType) throws SQLException {
         return null;
     }
 }
