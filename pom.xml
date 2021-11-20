@@ -16,8 +16,8 @@
         <mariadb-java-client.version>2.7.4</mariadb-java-client.version>
         <projectlombok.version>1.18.22</projectlombok.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
-        <flyway-core.version>8.0.2</flyway-core.version>
-        <logback.version>1.2.6</logback.version>
+        <flyway-core.version>8.0.5</flyway-core.version>
+        <logback.version>1.2.7</logback.version>
         <hibernate.core.version>5.6.1.Final</hibernate.core.version>
         <slf4j.version>1.7.32</slf4j.version>
         <junit.version>4.13.2</junit.version>
@@ -82,12 +82,31 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>by.itacademy.javaenterprise.goralchuk.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>${flyway-core.version}</version>
+                <configuration>
+                    <url>jdbc:mariadb://127.0.0.1:3306</url>
+                    <user>user</user>
+                    <password>userpass</password>
+                    <schemas>
+                        <schema>hibernateTest</schema>
+                    </schemas>
+                    <locations>
+                        <location>filesystem:src/main/resources/database/migration</location>
+                    </locations>
+                </configuration>
             </plugin>
         </plugins>
     </build>

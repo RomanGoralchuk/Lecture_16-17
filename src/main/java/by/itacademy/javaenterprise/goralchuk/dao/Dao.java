@@ -5,13 +5,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface Dao<T> {
-    T get(Serializable id) throws SQLException;
+    T find(Long id) throws SQLException;
 
-    T save(T t) throws SQLException;
+    boolean save(T t) throws SQLException;
 
-    void update(T t) throws SQLException;
+    boolean update(T t) throws SQLException;
 
-    int delete(Serializable id) throws SQLException;
+    boolean delete(Long id) throws SQLException;
 
     List<T> findAllEntity() throws SQLException;
 }

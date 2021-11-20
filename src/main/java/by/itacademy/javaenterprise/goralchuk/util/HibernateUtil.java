@@ -1,4 +1,4 @@
-package by.itacademy.javaenterprise.goralchuk.hibernate;
+package by.itacademy.javaenterprise.goralchuk.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

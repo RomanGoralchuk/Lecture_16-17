@@ -1,41 +1,45 @@
 package by.itacademy.javaenterprise.goralchuk.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "pet")
 public class Pet implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pet_id")
     private Long id;
-    @Column(name = "pet_name")
-    private String animalName;
-    @Column(name = "pet_type")
-    private PetType petType;
-    @Column(name = "pet_birthday")
+    private String name;
+    private PetType type;
+    @Temporal(TemporalType.DATE)
     private Date birthday;
-    @OneToOne(mappedBy = "pet", fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
-    private People master;
+/*    @OneToOne(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "pet_id")
+    private People master;*/
+
+    public Pet(String animalName, PetType petType, Date birthday) {
+        this.name = animalName;
+        this.type = petType;
+        this.birthday = birthday;
+    }
 
     @Override
     public String toString() {
         return "\n Pet{" +
                 "id=" + id +
-                ", animalName='" + animalName + "'" +
-                ", petType=" + petType +
-                ", birthday=" + birthday +
-                ", master='" + master.getName() + "'" +
+                ", PetName='" + name + "'" +
+                ", PetType=" + type.getCode() +
+                ", PetBirthday=" + birthday +
+               /* ", master='" + master.getName() + "'" +*/
                 '}';
     }
 }
