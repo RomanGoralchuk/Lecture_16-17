@@ -1,4 +1,9 @@
-INSERT INTO `people` (`people_id`, `name`, `surname`, `pet_id`) VALUES
-	(1, 'Vasya', 'Kunitsyn', 3),
-	(2, 'Petya', 'Petrov', 2),
-	(3, 'Mila', 'Zohan', 1);
+INSERT INTO people (name, surname, pet_id) VALUES
+	('Vasya', 'Kunitsyn' , 1),
+	('Petya', 'Petrov', 2),
+	('Mila', 'Zohan', 3),
+	('Roma', 'Goralchuk', 4),
+	('Stepan', 'Dudkin', 5),
+	('Yulia', 'Alehno', 6),
+	('Eugen', 'Molchan', null),
+	('Petro', 'MonoEye', 7);

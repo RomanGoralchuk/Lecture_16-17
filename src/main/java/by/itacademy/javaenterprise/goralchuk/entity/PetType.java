@@ -1,6 +1,5 @@
 package by.itacademy.javaenterprise.goralchuk.entity;
 
-import by.itacademy.javaenterprise.goralchuk.App;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

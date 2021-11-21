@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>by.itacademy.javaenterprise.goralchuk</groupId>
-    <artifactId>lecture-16</artifactId>
+    <artifactId>lecture-17</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <description>Hibernate</description>
+    <description>Lecture 16 and 17 /Hibernate CRUD</description>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

@@ -51,13 +51,13 @@ public class PetDaoImpl implements PetDao {
                 Pet petOld = em.find(Pet.class, petNew.getId());
                 try {
                     em.detach(petOld);
-                    if (petNew.getName() != null){
+                    if (petNew.getName() != null) {
                         petOld.setName(petNew.getName());
                     }
-                    if (petNew.getType() != null){
+                    if (petNew.getType() != null) {
                         petOld.setType(petNew.getType());
                     }
-                    if (petNew.getBirthday() != null){
+                    if (petNew.getBirthday() != null) {
                         petOld.setBirthday(petNew.getBirthday());
                     }
                     em.getTransaction().begin();
@@ -89,8 +89,11 @@ public class PetDaoImpl implements PetDao {
         } else {
             try {
                 em.getTransaction().begin();
+                pet.getMaster().setPetPeople(null);
                 em.remove(pet);
                 em.getTransaction().commit();
+                logger.info("\n Object " + pet + " deleted");
+                return true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
                 logger.error("Transaction failed " + e.getMessage(), e);
@@ -98,8 +101,6 @@ public class PetDaoImpl implements PetDao {
             } finally {
                 em.close();
             }
-            logger.info("\n Object " + pet + " deleted");
-            return true;
         }
     }
 

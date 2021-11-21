@@ -1,7 +1,6 @@
 package by.itacademy.javaenterprise.goralchuk.dao;
 
 import by.itacademy.javaenterprise.goralchuk.entity.People;
-import by.itacademy.javaenterprise.goralchuk.entity.Pet;
 import by.itacademy.javaenterprise.goralchuk.entity.PetType;
 
 import java.sql.SQLException;
