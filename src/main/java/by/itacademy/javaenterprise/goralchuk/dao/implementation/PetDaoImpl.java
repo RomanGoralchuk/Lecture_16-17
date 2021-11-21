@@ -3,7 +3,6 @@ package by.itacademy.javaenterprise.goralchuk.dao.implementation;
 import by.itacademy.javaenterprise.goralchuk.dao.PetDao;
 import by.itacademy.javaenterprise.goralchuk.entity.Pet;
 import by.itacademy.javaenterprise.goralchuk.entity.PetType;
-import by.itacademy.javaenterprise.goralchuk.util.HibernateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,7 +85,9 @@ public class PetDaoImpl implements PetDao {
         } else {
             try {
                 em.getTransaction().begin();
-                pet.getMaster().setPetPeople(null);
+                if (pet.getMaster() != null) {
+                    pet.getMaster().setPetPeople(null);
+                }
                 em.remove(pet);
                 em.getTransaction().commit();
                 logger.info("\n Object " + pet + " deleted");

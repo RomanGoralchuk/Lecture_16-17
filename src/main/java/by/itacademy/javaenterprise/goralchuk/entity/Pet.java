@@ -46,7 +46,7 @@ public class Pet implements Serializable {
         return "Pet{" +
                 "Id=" + id +
                 ", PetName='" + name + "'" +
-                ", PetType=" + type.getCode() +
+                ", PetType=" + type +
                 ", PetBirthday=" + birthday +
                 "}";
     }

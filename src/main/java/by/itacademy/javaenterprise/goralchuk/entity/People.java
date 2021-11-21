@@ -1,6 +1,5 @@
 package by.itacademy.javaenterprise.goralchuk.entity;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

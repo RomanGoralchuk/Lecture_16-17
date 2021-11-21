@@ -30,12 +30,12 @@ public class PeopleDaoImplTest {
     public TestWatcher watchman = new TestWatcher() {
         @Override
         protected void failed(Throwable e, Description description) {
-            logger.error("Test failed: " + description, e);
+            logger.error("Test failed: {}", description, e);
         }
 
         @Override
         protected void succeeded(Description description) {
-            logger.info("Test successes: " + description);
+            logger.info("Test successes: {}", description);
         }
     };
 
@@ -52,7 +52,7 @@ public class PeopleDaoImplTest {
     }
 
     @Test
-    public void whenFindObjectById() {
+    public void whenFindPeopleById() {
         Long expectedId = 10L;
         People people = new People();
         people.setId(expectedId);
@@ -60,12 +60,12 @@ public class PeopleDaoImplTest {
         when(eManager.find(People.class, expectedId)).thenReturn(people);
 
         assertEquals(people, peopleDao.find(expectedId));
-        logger.info("\n FirstObject   " + people);
-        logger.info("\n SecondObject   " + peopleDao.find(expectedId));
+        logger.info("\n FirstObject  {}", people);
+        logger.info("\n SecondObject  {}", peopleDao.find(expectedId));
     }
 
     @Test
-    public void whenSaveObjectToDatabase() {
+    public void whenSavePeopleToDatabase() {
         People people = new People();
         people.setId(10L);
 
@@ -78,7 +78,7 @@ public class PeopleDaoImplTest {
     }
 
     @Test
-    public void whenUpdateObjectToDatabase() {
+    public void whenUpdatePeopleToDatabase() {
         Long keyId = 10L;
 
         People peopleInDatabase = new People();
@@ -102,12 +102,12 @@ public class PeopleDaoImplTest {
 
         logger.info("\n Data before changes {}", peopleInDatabase);
         assertTrue("Was the transaction successful - {}", peopleDao.update(peopleUpdateData));
-        assertEquals("The data after the update is the same", peopleNew, peopleInDatabase);
+        assertEquals("Compare by content test", peopleNew.toString(), peopleInDatabase.toString());
         logger.info("\n Data after changes {}", peopleInDatabase);
     }
 
     @Test
-    public void whenDeleteObjectFromDatabase() {
+    public void whenDeletePeopleFromDatabase() {
         Long keyId = 10L;
 
         People people = new People();
@@ -118,11 +118,10 @@ public class PeopleDaoImplTest {
 
         logger.info("Test people {}", people);
         assertTrue(peopleDao.delete(keyId));
-        assertFalse(peopleDao.delete(keyId));
     }
 
     @Test
-    public void findAllEntity() {
+    public void whenFindAllPeople() {
         List<People> peopleList = new ArrayList<>();
         peopleList.add(0, new People("TestName 1", "TestSurname 1", null));
         peopleList.add(1, new People("TestName 2", "TestSurname 2", null));
@@ -139,7 +138,7 @@ public class PeopleDaoImplTest {
     }
 
     @Test
-    public void getAllPeopleByPetType() {
+    public void whenFindAllPeopleByPetType() {
         List<People> peopleList = new ArrayList<>();
         peopleList.add(0,
                 new People("TestName1", "TestSurname1",
