@@ -33,6 +33,7 @@ public class PeopleDaoImpl implements PeopleDao {
             em.getTransaction().begin();
             em.persist(people);
             em.getTransaction().commit();
+            logger.info("The transaction was successful");
             return true;
         } catch (Exception e) {
             em.getTransaction().rollback();

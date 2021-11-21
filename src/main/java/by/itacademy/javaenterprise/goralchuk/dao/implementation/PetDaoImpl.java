@@ -35,6 +35,7 @@ public class PetDaoImpl implements PetDao {
             em.getTransaction().begin();
             em.persist(pet);
             em.getTransaction().commit();
+            logger.info("The transaction was successful");
             return true;
         } catch (Exception e) {
             em.getTransaction().rollback();

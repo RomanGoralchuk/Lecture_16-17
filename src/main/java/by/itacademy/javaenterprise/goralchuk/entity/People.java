@@ -19,7 +19,6 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 @NoArgsConstructor
 @Entity
 @Table(name = "people")
@@ -33,6 +32,12 @@ public class People implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "pet_id")
     private Pet petPeople;
+
+    public People(String name, String surname, Pet petPeople) {
+        this.name = name;
+        this.surname = surname;
+        this.petPeople = petPeople;
+    }
 
     @Override
     public String toString() {
