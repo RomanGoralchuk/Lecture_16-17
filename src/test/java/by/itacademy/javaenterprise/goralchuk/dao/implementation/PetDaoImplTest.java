@@ -46,8 +46,7 @@ public class PetDaoImplTest {
 
     @Before
     public void setUp() throws Exception {
-        eManager = mock(EntityManager.class);
-        petDao = new PetDaoImpl();
+
     }
 
     @After

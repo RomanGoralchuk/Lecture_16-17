@@ -41,10 +41,15 @@ public enum PetType {
             if (string == null) {
                 return null;
             }
-            return Stream.of(PetType.values())
-                    .filter(el -> el.getCode().equals(string))
-                    .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Bad argument converter"));
+            try {
+                return Stream.of(PetType.values())
+                        .filter(el -> el.getCode().equals(string))
+                        .findFirst()
+                        .orElseThrow(() -> new IllegalArgumentException("Bad argument converter"));
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                return null;
+            }
         }
     }
 }

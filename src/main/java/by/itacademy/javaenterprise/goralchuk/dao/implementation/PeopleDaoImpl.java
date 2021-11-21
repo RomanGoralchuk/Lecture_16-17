@@ -3,7 +3,6 @@ package by.itacademy.javaenterprise.goralchuk.dao.implementation;
 import by.itacademy.javaenterprise.goralchuk.dao.PeopleDao;
 import by.itacademy.javaenterprise.goralchuk.entity.People;
 import by.itacademy.javaenterprise.goralchuk.entity.PetType;
-import by.itacademy.javaenterprise.goralchuk.util.HibernateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
@@ -13,9 +12,12 @@ public class PeopleDaoImpl implements PeopleDao {
     private static final Logger logger = LoggerFactory.getLogger(PeopleDaoImpl.class);
     private EntityManager em;
 
+    public PeopleDaoImpl(EntityManager em) {
+        this.em = em;
+    }
+
     @Override
     public People find(Long id) {
-        em = HibernateUtil.getEntityManager();
         People people = em.find(People.class, id);
         if (people == null) {
             logger.error(new IllegalArgumentException("(" + id + ") -This value does not exist in the database.").getMessage());
@@ -27,7 +29,6 @@ public class PeopleDaoImpl implements PeopleDao {
 
     @Override
     public boolean save(People people) {
-        em = HibernateUtil.getEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(people);
@@ -37,14 +38,11 @@ public class PeopleDaoImpl implements PeopleDao {
             em.getTransaction().rollback();
             logger.error("Transaction failed " + e.getMessage(), e);
             return false;
-        } finally {
-            em.close();
         }
     }
 
     @Override
     public boolean update(People peopleNew){
-        em = HibernateUtil.getEntityManager();
         if (peopleNew != null) {
             try {
                 People peopleOld = em.find(People.class, peopleNew.getId());
@@ -67,8 +65,6 @@ public class PeopleDaoImpl implements PeopleDao {
                     em.getTransaction().rollback();
                     logger.error("Transaction failed " + e.getMessage(), e);
                     return false;
-                } finally {
-                    em.close();
                 }
             } catch (IllegalArgumentException ex) {
                 logger.error("No such object was found in the database", ex);
@@ -80,7 +76,6 @@ public class PeopleDaoImpl implements PeopleDao {
 
     @Override
     public boolean delete(Long id) {
-        em = HibernateUtil.getEntityManager();
         People people = em.find(People.class, id);
         if (people == null) {
             logger.error(new IllegalArgumentException("(" + id + ") -This value does not exist in the database.").getMessage());
@@ -96,15 +91,12 @@ public class PeopleDaoImpl implements PeopleDao {
                 em.getTransaction().rollback();
                 logger.error("Transaction failed " + e.getMessage(), e);
                 return false;
-            } finally {
-                em.close();
             }
         }
     }
 
     @Override
     public List<People> findAllEntity() {
-        em = HibernateUtil.getEntityManager();
         try {
             List<People> list = em.createQuery("from People").getResultList();
             return list;
@@ -116,7 +108,6 @@ public class PeopleDaoImpl implements PeopleDao {
 
     @Override
     public List<People> getAllPeopleByPetType(PetType petType) {
-        em = HibernateUtil.getEntityManager();
         try {
             List<People> list = em.createQuery(
                     "from People where petPeople.type = ?1")

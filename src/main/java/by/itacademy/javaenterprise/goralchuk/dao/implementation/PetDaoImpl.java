@@ -14,9 +14,12 @@ public class PetDaoImpl implements PetDao {
     private static final Logger logger = LoggerFactory.getLogger(PetDaoImpl.class);
     private EntityManager em;
 
+    public PetDaoImpl(EntityManager em) {
+        this.em = em;
+    }
+
     @Override
     public Pet find(Long id) {
-        em = HibernateUtil.getEntityManager();
         Pet pet = em.find(Pet.class, id);
         if (pet == null) {
             logger.error(new IllegalArgumentException("(" + id + ") -This value does not exist in the database.").getMessage());
@@ -28,7 +31,6 @@ public class PetDaoImpl implements PetDao {
 
     @Override
     public boolean save(Pet pet) {
-        em = HibernateUtil.getEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(pet);
@@ -38,14 +40,11 @@ public class PetDaoImpl implements PetDao {
             em.getTransaction().rollback();
             logger.error("Transaction failed " + e.getMessage(), e);
             return false;
-        } finally {
-            em.close();
         }
     }
 
     @Override
     public boolean update(Pet petNew) {
-        em = HibernateUtil.getEntityManager();
         if (petNew != null) {
             try {
                 Pet petOld = em.find(Pet.class, petNew.getId());
@@ -68,8 +67,6 @@ public class PetDaoImpl implements PetDao {
                     em.getTransaction().rollback();
                     logger.error("Transaction failed " + e.getMessage(), e);
                     return false;
-                } finally {
-                    em.close();
                 }
             } catch (IllegalArgumentException ex) {
                 logger.error("No such object was found in the database", ex);
@@ -81,7 +78,6 @@ public class PetDaoImpl implements PetDao {
 
     @Override
     public boolean delete(Long id) {
-        em = HibernateUtil.getEntityManager();
         Pet pet = em.find(Pet.class, id);
         if (pet == null) {
             logger.error(new IllegalArgumentException("(" + id + ") -This value does not exist in the database.").getMessage());
@@ -98,15 +94,12 @@ public class PetDaoImpl implements PetDao {
                 em.getTransaction().rollback();
                 logger.error("Transaction failed " + e.getMessage(), e);
                 return false;
-            } finally {
-                em.close();
             }
         }
     }
 
     @Override
     public List<Pet> findAllEntity() {
-        em = HibernateUtil.getEntityManager();
         try {
             List<Pet> list = em.createQuery("from Pet").getResultList();
             return list;
@@ -118,7 +111,6 @@ public class PetDaoImpl implements PetDao {
 
     @Override
     public List<Pet> getAllPetByType(PetType petType) {
-        em = HibernateUtil.getEntityManager();
         try {
             List<Pet> list = em.createQuery("from Pet where type = ?1")
                     .setParameter(1, petType)
